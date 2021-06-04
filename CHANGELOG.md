@@ -15,6 +15,7 @@ and this project adheres to
 
 ### Added
 
+- The ability to change group and user ID on startup on Unix ([#2763]).
 - Experimental OpenBSD support for AMD64 and 64-bit ARM CPUs ([#2439]).
 - Support for custom port in DNS-over-HTTPS profiles for Apple's devices
   ([#3172]).
@@ -56,6 +57,7 @@ released by then.
 [#2439]: https://github.com/AdguardTeam/AdGuardHome/issues/2439
 [#2441]: https://github.com/AdguardTeam/AdGuardHome/issues/2441
 [#2443]: https://github.com/AdguardTeam/AdGuardHome/issues/2443
+[#2763]: https://github.com/AdguardTeam/AdGuardHome/issues/2763
 [#3136]: https://github.com/AdguardTeam/AdGuardHome/issues/3136
 [#3172]: https://github.com/AdguardTeam/AdGuardHome/issues/3172
 [#3184]: https://github.com/AdguardTeam/AdGuardHome/issues/3184
