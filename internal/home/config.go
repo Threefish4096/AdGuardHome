@@ -37,8 +37,15 @@ type logSettings struct {
 
 // osConfig contains OS-related configuration.
 type osConfig struct {
+	// Group is the name of the group which AdGuard Home must switch to on
+	// startup.  Empty string means no switching.
 	Group string `yaml:"group"`
-	User  string `yaml:"user"`
+	// User is the name of the user which AdGuard Home must switch to on
+	// startup.  Empty string means no switching.
+	User string `yaml:"user"`
+	// RlimitNoFile is the maximum number of opened fd's per process.  Zero
+	// means use the default value.
+	RlimitNoFile uint64 `yaml:"rlimit_nofile"`
 }
 
 // configuration is loaded from YAML
@@ -58,16 +65,9 @@ type configuration struct {
 	// AuthBlockMin is the duration, in minutes, of the block of new login
 	// attempts after AuthAttempts unsuccessful login attempts.
 	AuthBlockMin uint   `yaml:"block_auth_min"`
-	ProxyURL     string `yaml:"http_proxy"` // Proxy address for our HTTP client
-	Language     string `yaml:"language"`   // two-letter ISO 639-1 language code
-
-	// RlimitNoFile is the maximum number of opened fd's per process.  Zero
-	// means use the default value.
-	//
-	// TODO(a.garipov): Make a migration and move this to osConfig.
-	RlimitNoFile uint64 `yaml:"rlimit_nofile"`
-
-	DebugPProf bool `yaml:"debug_pprof"` // Enable pprof HTTP server on port 6060
+	ProxyURL     string `yaml:"http_proxy"`  // Proxy address for our HTTP client
+	Language     string `yaml:"language"`    // two-letter ISO 639-1 language code
+	DebugPProf   bool   `yaml:"debug_pprof"` // Enable pprof HTTP server on port 6060
 
 	// TTL for a web session (in hours)
 	// An active session is automatically refreshed once a day.

@@ -32,6 +32,8 @@ and this project adheres to
 
 ### Changed
 
+- The setting `rlimit_nofile` is now in the `os` block of the configuration
+  file, together with the new `group` and `user` settings ([#2763]).
 - Permissions on filter files are now `0o644` instead of `0o600` ([#3198]).
 
 ### Deprecated

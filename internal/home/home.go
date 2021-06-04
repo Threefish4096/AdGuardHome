@@ -198,37 +198,39 @@ func logIfUnsupported(msg string, err error) (outErr error) {
 
 // configureOS sets the OS-related configuration.
 func configureOS(conf *configuration) (err error) {
-	if osConf := config.OSConfig; osConf != nil {
-		log.Info("%+v", osConf)
-		if osConf.Group != "" {
-			err = aghos.SetGroup(osConf.Group)
-			err = logIfUnsupported("warning: setting group", err)
-			if err != nil {
-				return fmt.Errorf("setting group: %w", err)
-			}
-
-			log.Info("group set to %s", osConf.Group)
-		}
-
-		if osConf.User != "" {
-			err = aghos.SetUser(osConf.User)
-			err = logIfUnsupported("warning: setting user", err)
-			if err != nil {
-				return fmt.Errorf("setting user: %w", err)
-			}
-
-			log.Info("user set to %s", osConf.User)
-		}
+	osConf := conf.OSConfig
+	if osConf == nil {
+		return nil
 	}
 
-	if config.RlimitNoFile != 0 {
-		err = aghos.SetRlimit(conf.RlimitNoFile)
+	if osConf.Group != "" {
+		err = aghos.SetGroup(osConf.Group)
+		err = logIfUnsupported("warning: setting group", err)
+		if err != nil {
+			return fmt.Errorf("setting group: %w", err)
+		}
+
+		log.Info("group set to %s", osConf.Group)
+	}
+
+	if osConf.User != "" {
+		err = aghos.SetUser(osConf.User)
+		err = logIfUnsupported("warning: setting user", err)
+		if err != nil {
+			return fmt.Errorf("setting user: %w", err)
+		}
+
+		log.Info("user set to %s", osConf.User)
+	}
+
+	if osConf.RlimitNoFile != 0 {
+		err = aghos.SetRlimit(osConf.RlimitNoFile)
 		err = logIfUnsupported("warning: setting rlimit", err)
 		if err != nil {
 			return fmt.Errorf("setting rlimit: %w", err)
 		}
 
-		log.Info("rlimit_nofile set to %d", config.RlimitNoFile)
+		log.Info("rlimit_nofile set to %d", osConf.RlimitNoFile)
 	}
 
 	return nil
